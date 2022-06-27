@@ -26,11 +26,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor whiteColor];
     [self initProperties];
     [self setUpLoginView];
-    // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void) initProperties {
@@ -54,15 +53,12 @@
         } else {
             NSLog(@"User registered successfully");
             // manually segue to logged in view
-            HomeViewController *homeVC = [[HomeViewController alloc] init];
-            [self presentViewController:homeVC animated:true completion:nil];
-            
+            [self presentHomeVC];
         }
     }];
 }
 
 - (void) loginUser:(UIButton *)sender {
-    
     NSString* username = self.usernameField.text;
     NSString* password = self.passwordField.text;
     
@@ -71,12 +67,21 @@
             NSLog(@"User log in failed: %@", error.localizedDescription);
         } else {
             NSLog(@"User logged in successfully");
-            HomeViewController *homeVC = [[HomeViewController alloc] init];
-            [self presentViewController:homeVC animated:true completion:nil];
+            [self presentHomeVC];
         }
     }];
     
 }
+
+- (void) presentHomeVC {
+    HomeViewController *homeVC = [[HomeViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] init];
+    
+    [nav setViewControllers:@[homeVC]];
+    [nav setModalPresentationStyle:UIModalPresentationFullScreen];
+    [self presentViewController:nav animated:true completion:nil];
+}
+
 
 - (UILabel*)createInstagramLabel {
     UILabel *label = [[UILabel alloc] init];

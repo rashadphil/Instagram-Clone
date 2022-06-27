@@ -7,6 +7,8 @@
 
 #import "SceneDelegate.h"
 #import "LoginViewController.h"
+#import <Parse/Parse.h>
+#import "HomeViewController.h"
 
 @interface SceneDelegate ()
 
@@ -34,6 +36,26 @@
     self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene*)scene];
     self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
+    
+    
+    // parse config
+    ParseClientConfiguration *config = [ParseClientConfiguration  configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+
+        configuration.applicationId = @"vvbIwlXyP84uRz4ZtrX1eT63OMAnZ85hcfTl141O";
+        configuration.clientKey = @"3A9foPGWhcrDUHbul0UWcUfMfgXkt3OKOb2XCCph";
+        configuration.server = @"https://parseapi.back4app.com";
+    }];
+
+    [Parse initializeWithConfiguration:config];
+    
+    // already logged in, present home screen
+    if (PFUser.currentUser) {
+        HomeViewController *homeVC = [[HomeViewController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] init];
+
+        [nav setViewControllers:@[homeVC]];
+        self.window.rootViewController = nav;
+    }
 }
 
 
