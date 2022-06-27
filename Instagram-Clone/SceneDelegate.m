@@ -20,9 +20,9 @@
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     
     UIViewController *vc1 = [[ViewController alloc] init];
-    [vc1.view setBackgroundColor:[UIColor redColor]];
+//    [vc1.view setBackgroundColor:[UIColor redColor]];
     UIViewController *vc2 = [[ViewController alloc] init];
-    [vc2.view setBackgroundColor:[UIColor blueColor]];
+//    [vc2.view setBackgroundColor:[UIColor blueColor]];
     
     UITabBarItem *tabBar1 = [[UITabBarItem alloc] initWithTitle:@"Bar1" image:nil tag:0];
     UITabBarItem *tabBar2 = [[UITabBarItem alloc] initWithTitle:@"Bar2" image:nil tag:1];
