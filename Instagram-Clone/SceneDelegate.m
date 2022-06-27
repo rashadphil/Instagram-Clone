@@ -6,7 +6,7 @@
 //
 
 #import "SceneDelegate.h"
-#import "ViewController.h"
+#import "LoginViewController.h"
 
 @interface SceneDelegate ()
 
@@ -19,9 +19,9 @@
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     
-    UIViewController *vc1 = [[ViewController alloc] init];
+    UIViewController *vc1 = [[LoginViewController alloc] init];
 //    [vc1.view setBackgroundColor:[UIColor redColor]];
-    UIViewController *vc2 = [[ViewController alloc] init];
+    UIViewController *vc2 = [[LoginViewController alloc] init];
 //    [vc2.view setBackgroundColor:[UIColor blueColor]];
     
     UITabBarItem *tabBar1 = [[UITabBarItem alloc] initWithTitle:@"Bar1" image:nil tag:0];

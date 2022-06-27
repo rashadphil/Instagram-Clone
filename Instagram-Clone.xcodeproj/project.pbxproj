@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		1F77AA3128692097005B6D54 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F77AA3028692097005B6D54 /* AppDelegate.m */; };
 		1F77AA3428692097005B6D54 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F77AA3328692097005B6D54 /* SceneDelegate.m */; };
-		1F77AA3728692097005B6D54 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F77AA3628692097005B6D54 /* ViewController.m */; };
+		1F77AA3728692097005B6D54 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F77AA3628692097005B6D54 /* LoginViewController.m */; };
 		1F77AA3C28692099005B6D54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F77AA3B28692099005B6D54 /* Assets.xcassets */; };
 		1F77AA3F28692099005B6D54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F77AA3D28692099005B6D54 /* LaunchScreen.storyboard */; };
 		1F77AA4228692099005B6D54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F77AA4128692099005B6D54 /* main.m */; };
 		1FDE58842869ED8600C0AE5C /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE58832869ED8600C0AE5C /* UIView+Extension.m */; };
+		1FDE58AC286A621400C0AE5C /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE58AB286A621400C0AE5C /* HomeViewController.m */; };
 		3AF03CB1021EC392E90B3693 /* Pods_Instagram_Clone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70660DED0FEDA949E425657F /* Pods_Instagram_Clone.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,14 +24,16 @@
 		1F77AA3028692097005B6D54 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1F77AA3228692097005B6D54 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		1F77AA3328692097005B6D54 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		1F77AA3528692097005B6D54 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		1F77AA3628692097005B6D54 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1F77AA3528692097005B6D54 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		1F77AA3628692097005B6D54 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		1F77AA3B28692099005B6D54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F77AA3E28692099005B6D54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1F77AA4028692099005B6D54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F77AA4128692099005B6D54 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1FDE58822869ED8600C0AE5C /* UIView+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		1FDE58832869ED8600C0AE5C /* UIView+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		1FDE58AA286A621400C0AE5C /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		1FDE58AB286A621400C0AE5C /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		6C8BB0C3C1C2EE25F1C2CB22 /* Pods-Instagram-Clone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-Clone.debug.xcconfig"; path = "Target Support Files/Pods-Instagram-Clone/Pods-Instagram-Clone.debug.xcconfig"; sourceTree = "<group>"; };
 		70660DED0FEDA949E425657F /* Pods_Instagram_Clone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instagram_Clone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75BCED28C9DA5CA5E4712E60 /* Pods-Instagram-Clone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-Clone.release.xcconfig"; path = "Target Support Files/Pods-Instagram-Clone/Pods-Instagram-Clone.release.xcconfig"; sourceTree = "<group>"; };
@@ -75,8 +78,10 @@
 				1F77AA3328692097005B6D54 /* SceneDelegate.m */,
 				1FDE58822869ED8600C0AE5C /* UIView+Extension.h */,
 				1FDE58832869ED8600C0AE5C /* UIView+Extension.m */,
-				1F77AA3528692097005B6D54 /* ViewController.h */,
-				1F77AA3628692097005B6D54 /* ViewController.m */,
+				1F77AA3528692097005B6D54 /* LoginViewController.h */,
+				1F77AA3628692097005B6D54 /* LoginViewController.m */,
+				1FDE58AA286A621400C0AE5C /* HomeViewController.h */,
+				1FDE58AB286A621400C0AE5C /* HomeViewController.m */,
 				1F77AA3B28692099005B6D54 /* Assets.xcassets */,
 				1F77AA3D28692099005B6D54 /* LaunchScreen.storyboard */,
 				1F77AA4028692099005B6D54 /* Info.plist */,
@@ -99,7 +104,6 @@
 				6C8BB0C3C1C2EE25F1C2CB22 /* Pods-Instagram-Clone.debug.xcconfig */,
 				75BCED28C9DA5CA5E4712E60 /* Pods-Instagram-Clone.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -216,11 +220,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F77AA3728692097005B6D54 /* ViewController.m in Sources */,
+				1F77AA3728692097005B6D54 /* LoginViewController.m in Sources */,
 				1FDE58842869ED8600C0AE5C /* UIView+Extension.m in Sources */,
 				1F77AA3128692097005B6D54 /* AppDelegate.m in Sources */,
 				1F77AA4228692099005B6D54 /* main.m in Sources */,
 				1F77AA3428692097005B6D54 /* SceneDelegate.m in Sources */,
+				1FDE58AC286A621400C0AE5C /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

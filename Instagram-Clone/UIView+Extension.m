@@ -10,7 +10,7 @@
 @implementation UIView (AnchorExtension)
 
 
-- (void) anchor:(NSLayoutYAxisAnchor*)top left:(NSLayoutXAxisAnchor*)left bottom:(NSLayoutYAxisAnchor*)bottom right:(NSLayoutXAxisAnchor*)right paddingTop:(CGFloat)paddingTop paddingLeft:(CGFloat)paddingLeft paddingBottom:(CGFloat)paddingBottom paddingRight:(CGFloat)paddingRight width:(CGFloat)width height:(CGFloat)height enableInsets:(BOOL)enableInsets {
+- (void) anchor:(nullable NSLayoutYAxisAnchor*)top left:(nullable NSLayoutXAxisAnchor*)left bottom:(nullable NSLayoutYAxisAnchor*)bottom right:(nullable NSLayoutXAxisAnchor*)right paddingTop:(CGFloat)paddingTop paddingLeft:(CGFloat)paddingLeft paddingBottom:(CGFloat)paddingBottom paddingRight:(CGFloat)paddingRight width:(CGFloat)width height:(CGFloat)height enableInsets:(BOOL)enableInsets {
     
     CGFloat topInset = 0;
     CGFloat bottomInset = 0;
