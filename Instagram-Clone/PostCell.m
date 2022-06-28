@@ -49,6 +49,7 @@
     PFImageView *imageView = [[PFImageView alloc] init];
     imageView.clipsToBounds = true;
     imageView.contentMode = UIViewContentModeScaleAspectFill;
+    
     return imageView;
 }
 

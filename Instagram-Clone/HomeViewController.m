@@ -12,6 +12,7 @@
 #import "ComposeViewController.h"
 #import "PostCell.h"
 #import "Post.h"
+#import "PostDetailViewController.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -137,6 +138,14 @@
     return view;
 }
 
+- (void)presentDetailViewForPost:(Post*)post {
+    
+    PostDetailViewController *postDetailVC = [[PostDetailViewController alloc] init];
+    postDetailVC.post = post;
+    [self presentViewController:postDetailVC animated:true completion:nil];
+    
+}
+
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
     Post *currentPost = self.postArray[indexPath.row];
@@ -149,4 +158,9 @@
     return self.postArray.count;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Post *selectedPost = self.postArray[indexPath.row];
+    [self presentDetailViewForPost:selectedPost];
+    
+}
 @end

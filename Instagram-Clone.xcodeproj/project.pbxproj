@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F2AC1B9286BA038006A078D /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2AC1B8286BA038006A078D /* PostDetailViewController.m */; };
 		1F319239286AB0F20065CB8D /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F319238286AB0F20065CB8D /* Post.m */; };
 		1F31923C286AB6F70065CB8D /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F31923B286AB6F70065CB8D /* PostCell.m */; };
 		1F77AA3128692097005B6D54 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F77AA3028692097005B6D54 /* AppDelegate.m */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F2AC1B7286BA038006A078D /* PostDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
+		1F2AC1B8286BA038006A078D /* PostDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostDetailViewController.m; sourceTree = "<group>"; };
 		1F319237286AB0F20065CB8D /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		1F319238286AB0F20065CB8D /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		1F31923A286AB6F70065CB8D /* PostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
@@ -81,6 +84,8 @@
 		1F77AA2E28692097005B6D54 /* Instagram-Clone */ = {
 			isa = PBXGroup;
 			children = (
+				1F2AC1B7286BA038006A078D /* PostDetailViewController.h */,
+				1F2AC1B8286BA038006A078D /* PostDetailViewController.m */,
 				1F77AA2F28692097005B6D54 /* AppDelegate.h */,
 				1F77AA3028692097005B6D54 /* AppDelegate.m */,
 				1F77AA3228692097005B6D54 /* SceneDelegate.h */,
@@ -236,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F77AA3728692097005B6D54 /* LoginViewController.m in Sources */,
+				1F2AC1B9286BA038006A078D /* PostDetailViewController.m in Sources */,
 				1FDE58842869ED8600C0AE5C /* UIView+Extension.m in Sources */,
 				1F77AA3128692097005B6D54 /* AppDelegate.m in Sources */,
 				1F319239286AB0F20065CB8D /* Post.m in Sources */,
