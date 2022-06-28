@@ -9,10 +9,12 @@
 #import <Parse/Parse.h>
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
+#import "ComposeViewController.h"
 
 @interface HomeViewController ()
 
 @property (strong, nonatomic) UIButton *logoutButton;
+@property (strong, nonatomic) UIButton *composeButton;
 @property (strong, nonatomic) UINavigationController *myNav;
 
 @end
@@ -32,6 +34,7 @@
 
 - (void) initProperties {
     self.logoutButton = [self createLogoutButton];
+    self.composeButton = [self createComposeButton];
 }
 
 - (void) setupNavbar {
@@ -40,8 +43,12 @@
     UINavigationBar *navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, barHeight, self.myNav.view.frame.size.width, 44)];
     
     UINavigationItem *navItem = [[UINavigationItem alloc] initWithTitle:@"Home Feed"];
+    
     UIBarButtonItem *logoutButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.logoutButton];
+    UIBarButtonItem *postButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.composeButton];
+    
     [navItem setLeftBarButtonItem:logoutButtonItem];
+    [navItem setRightBarButtonItem:postButtonItem];
     [navbar setItems:@[navItem]];
     [self.myNav.view addSubview:navbar];
 }
@@ -54,11 +61,34 @@
     }];
 }
 
+- (void) onComposePress:(UIButton *)sender {
+    [self presentComposeVC];
+    
+}
+
+- (void) presentComposeVC {
+    UINavigationController *nav = [[UINavigationController alloc] init];
+    ComposeViewController *composeVC = [[ComposeViewController alloc] init];
+    
+    [nav setViewControllers:@[composeVC]];
+    [nav setModalPresentationStyle:UIModalPresentationFullScreen];
+    [self presentViewController:nav animated:true completion:nil];
+}
+
 - (UIButton*)createLogoutButton {
     UIButton *button = [[UIButton alloc] init];
     [button addTarget:self action:@selector(logoutUser:) forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"Logout" forState:UIControlStateNormal];
     button.backgroundColor = [UIColor blueColor];
+    return button;
+}
+
+- (UIButton*)createComposeButton {
+    UIButton *button = [[UIButton alloc] init];
+    
+    [button setBackgroundImage:[UIImage imageNamed:@"insta_camera_btn"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(onComposePress:) forControlEvents:UIControlEventTouchUpInside];
+    
     return button;
 }
 
