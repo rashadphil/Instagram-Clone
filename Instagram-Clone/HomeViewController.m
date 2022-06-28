@@ -29,7 +29,10 @@
     [super viewDidLoad];
     [self initProperties];
     
-    self.view.backgroundColor = [UIColor redColor];
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
+    
     [self.view addSubview:self.tableView];
     
     self.myNav = self.navigationController;
@@ -59,6 +62,10 @@
         }
         
     }];
+}
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [self fetchPosts];
+    [refreshControl endRefreshing];
 }
 
 - (void) setupNavbar {
