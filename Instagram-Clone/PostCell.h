@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Post.h"
+@import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UILabel *authorLabel;
 @property (nonatomic, strong) UILabel *captionLabel;
-@property (nonatomic, strong) UIImageView *postImageView;
+@property (nonatomic, strong) PFImageView *postImageView;
 @property (nonatomic, strong) UILabel *likeCountLabel;
 @property (nonatomic, strong) UILabel *commentCountLabel;
 

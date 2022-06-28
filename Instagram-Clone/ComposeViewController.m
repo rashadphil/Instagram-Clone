@@ -7,7 +7,6 @@
 
 #import "ComposeViewController.h"
 #import "HomeViewController.h"
-#import "PhotoMapViewController.h"
 #import "Post.h"
 
 @interface ComposeViewController ()
@@ -28,7 +27,6 @@
     [self initProperties];
     
     self.view.backgroundColor = [UIColor blueColor];
-    // Do any additional setup after loading the view.
     self.myNav = self.navigationController;
     [self setupNavbar];
 }

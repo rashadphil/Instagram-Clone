@@ -10,12 +10,16 @@
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
 #import "ComposeViewController.h"
+#import "PostCell.h"
+#import "Post.h"
 
-@interface HomeViewController ()
+@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UIButton *logoutButton;
 @property (strong, nonatomic) UIButton *composeButton;
 @property (strong, nonatomic) UINavigationController *myNav;
+@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *postArray;
 
 @end
 
@@ -26,15 +30,35 @@
     [self initProperties];
     
     self.view.backgroundColor = [UIColor redColor];
+    [self.view addSubview:self.tableView];
     
-    // nav bar setup
     self.myNav = self.navigationController;
     [self setupNavbar];
+    
+    [self fetchPosts];
 }
 
 - (void) initProperties {
     self.logoutButton = [self createLogoutButton];
     self.composeButton = [self createComposeButton];
+    self.tableView = [self createTableView];
+}
+
+- (void) fetchPosts {
+    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    [query orderByDescending:@"createdAt"];
+    [query includeKey:@"author"];
+    query.limit = 20;
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray * posts, NSError * error) {
+        if (posts != nil) {
+            self.postArray = [posts mutableCopy];
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+        
+    }];
 }
 
 - (void) setupNavbar {
@@ -91,17 +115,31 @@
     
     return button;
 }
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UITableView*)createTableView {
+    CGFloat barHeight = UIApplication.sharedApplication.statusBarFrame.size.height;
+    CGFloat displayWidth = self.view.frame.size.width;
+    CGFloat displayHeight = self.view.frame.size.height;
+    
+    UITableView *view = [[UITableView alloc] initWithFrame:CGRectMake(0, barHeight, displayWidth, displayHeight-barHeight)];
+    
+    view.rowHeight = UITableViewAutomaticDimension;
+    [view registerClass:PostCell.self forCellReuseIdentifier:@"PostCell"];
+    view.dataSource = self;
+    view.delegate = self;
+    
+    return view;
 }
-*/
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
+    Post *currentPost = self.postArray[indexPath.row];
+    cell.backgroundColor = [UIColor greenColor];
+    [cell setPost:currentPost];
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.postArray.count;
+}
 
 @end
