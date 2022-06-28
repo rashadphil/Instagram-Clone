@@ -48,7 +48,7 @@
 - (PFImageView*)createPostImageView {
     PFImageView *imageView = [[PFImageView alloc] init];
     imageView.clipsToBounds = true;
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
     return imageView;
 }
 

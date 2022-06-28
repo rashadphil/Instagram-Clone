@@ -8,14 +8,17 @@
 #import "ComposeViewController.h"
 #import "HomeViewController.h"
 #import "Post.h"
+#import "UIView+Extension.h"
 
 @interface ComposeViewController ()
 
 @property (strong, nonatomic) UINavigationController *myNav;
 @property (strong, nonatomic) UIButton *cancelButton;
 @property (strong, nonatomic) UIButton *shareButton;
-@property (strong, nonatomic) UIButton *selectPhotoButton;
 @property (strong, nonatomic) UIImage *selectedImage;
+
+@property (strong, nonatomic) UIImageView *selectedImageView;
+@property (strong, nonatomic) UITextField *captionTextField;
 
 
 @end
@@ -29,19 +32,25 @@
     self.view.backgroundColor = [UIColor blueColor];
     self.myNav = self.navigationController;
     [self setupNavbar];
+    
+    [self.view addSubview:self.selectedImageView];
+    [self.view addSubview:self.captionTextField];
+    [self setupSelectedImageView];
+    [self setupCaptionTextField];
 }
 
 - (void) cancelPost:(UIButton *)sender {
     [self dismissViewControllerAnimated:true completion:nil];
 }
+
 - (void) sharePost:(UIButton *)sender {
     if (self.selectedImage) {
-        [Post postUserImage:self.selectedImage withCaption:@"Oh yeah" withCompletion:nil];
+        [Post postUserImage:self.selectedImage withCaption:self.captionTextField.text withCompletion:nil];
     }
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
-- (void) presentImagePicker:(UIButton *)sender {
+- (void) presentImagePicker:(id)sender {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
@@ -63,6 +72,7 @@
 
     // Do something with the images (based on your use case)
     self.selectedImage = originalImage;
+    self.selectedImageView.image = originalImage;
     
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -76,10 +86,8 @@
     UINavigationItem *navItem = [[UINavigationItem alloc] init];
     UIBarButtonItem *cancelButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.cancelButton];
     UIBarButtonItem *shareButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.shareButton];
-    UIBarButtonItem *selectPhotoButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.selectPhotoButton];
 
-//    [navItem setLeftBarButtonItem:cancelButtonItem];
-    [navItem setLeftBarButtonItem:selectPhotoButtonItem];
+    [navItem setLeftBarButtonItem:cancelButtonItem];
     [navItem setRightBarButtonItem:shareButtonItem];
     [navbar setItems:@[navItem]];
     [self.myNav.view addSubview:navbar];
@@ -88,7 +96,8 @@
 - (void) initProperties {
     self.cancelButton = [self createCancelButton];
     self.shareButton = [self createShareButton];
-    self.selectPhotoButton = [self createSelectPhotoButton];
+    self.selectedImageView = [self createSelectedImageView];
+    self.captionTextField = [self createCaptionTextField];
     
 }
 
@@ -106,13 +115,37 @@
     button.backgroundColor = [UIColor blueColor];
     return button;
 }
-- (UIButton*)createSelectPhotoButton {
-    UIButton *button = [[UIButton alloc] init];
-    [button addTarget:self action:@selector(presentImagePicker:) forControlEvents:UIControlEventTouchUpInside];
-    [button setTitle:@"Select Photo" forState:UIControlStateNormal];
-    button.backgroundColor = [UIColor blueColor];
-    return button;
+- (UIImageView*)createSelectedImageView {
+    UIImageView *view = [[UIImageView alloc] init];
+    [view setClipsToBounds:true];
+    view.image = [UIImage imageNamed:@"insta_camera_btn"];
+    view.backgroundColor = [UIColor purpleColor];
+    view.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(presentImagePicker:)];
+    tapGesture.numberOfTapsRequired = 1;
+
+    [view addGestureRecognizer:tapGesture];
+    
+    return view;
 }
+- (UITextField*)createCaptionTextField {
+    UITextField *textField = [[UITextField alloc] init];
+    textField.backgroundColor = [UIColor redColor];
+    textField.placeholder = @"Write a caption...";
+    textField.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
+    return textField;
+}
+
+- (void)setupSelectedImageView {
+    CGFloat paddingTop = UIApplication.sharedApplication.statusBarFrame.size.height + self.myNav.navigationBar.frame.size.height;
+    [self.selectedImageView anchor:self.view.topAnchor left:self.view.leftAnchor bottom:nil right:nil paddingTop:paddingTop paddingLeft:0 paddingBottom:10 paddingRight:0 width:120 height:120 enableInsets:false];
+}
+- (void)setupCaptionTextField {
+    CGFloat paddingTop = UIApplication.sharedApplication.statusBarFrame.size.height + self.myNav.navigationBar.frame.size.height;
+    [self.captionTextField anchor:self.view.topAnchor left:self.selectedImageView.rightAnchor bottom:nil right:self.view.rightAnchor paddingTop:paddingTop paddingLeft:0 paddingBottom:10 paddingRight:0 width:0 height:0 enableInsets:false];
+}
+
 
 /*
 #pragma mark - Navigation
