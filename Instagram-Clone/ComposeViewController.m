@@ -8,6 +8,7 @@
 #import "ComposeViewController.h"
 #import "HomeViewController.h"
 #import "PhotoMapViewController.h"
+#import "Post.h"
 
 @interface ComposeViewController ()
 
@@ -36,6 +37,9 @@
     [self dismissViewControllerAnimated:true completion:nil];
 }
 - (void) sharePost:(UIButton *)sender {
+    if (self.selectedImage) {
+        [Post postUserImage:self.selectedImage withCaption:@"Oh yeah" withCompletion:nil];
+    }
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
