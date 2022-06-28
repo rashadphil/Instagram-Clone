@@ -63,6 +63,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F2AC1BA286BAA03006A078D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1FDE58AD286A839A00C0AE5C /* ComposeViewController.h */,
+				1FDE58AE286A839A00C0AE5C /* ComposeViewController.m */,
+				1FDE58AA286A621400C0AE5C /* HomeViewController.h */,
+				1FDE58AB286A621400C0AE5C /* HomeViewController.m */,
+				1F77AA3528692097005B6D54 /* LoginViewController.h */,
+				1F77AA3628692097005B6D54 /* LoginViewController.m */,
+				1F2AC1B7286BA038006A078D /* PostDetailViewController.h */,
+				1F2AC1B8286BA038006A078D /* PostDetailViewController.m */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		1F77AA2328692097005B6D54 = {
 			isa = PBXGroup;
 			children = (
@@ -84,8 +99,7 @@
 		1F77AA2E28692097005B6D54 /* Instagram-Clone */ = {
 			isa = PBXGroup;
 			children = (
-				1F2AC1B7286BA038006A078D /* PostDetailViewController.h */,
-				1F2AC1B8286BA038006A078D /* PostDetailViewController.m */,
+				1F2AC1BA286BAA03006A078D /* View Controllers */,
 				1F77AA2F28692097005B6D54 /* AppDelegate.h */,
 				1F77AA3028692097005B6D54 /* AppDelegate.m */,
 				1F77AA3228692097005B6D54 /* SceneDelegate.h */,
@@ -94,14 +108,8 @@
 				1F319237286AB0F20065CB8D /* Post.h */,
 				1F319238286AB0F20065CB8D /* Post.m */,
 				1FDE58832869ED8600C0AE5C /* UIView+Extension.m */,
-				1F77AA3528692097005B6D54 /* LoginViewController.h */,
-				1F77AA3628692097005B6D54 /* LoginViewController.m */,
-				1FDE58AA286A621400C0AE5C /* HomeViewController.h */,
-				1FDE58AB286A621400C0AE5C /* HomeViewController.m */,
 				1F31923A286AB6F70065CB8D /* PostCell.h */,
 				1F31923B286AB6F70065CB8D /* PostCell.m */,
-				1FDE58AD286A839A00C0AE5C /* ComposeViewController.h */,
-				1FDE58AE286A839A00C0AE5C /* ComposeViewController.m */,
 				1F77AA3B28692099005B6D54 /* Assets.xcassets */,
 				1F77AA3D28692099005B6D54 /* LaunchScreen.storyboard */,
 				1F77AA4028692099005B6D54 /* Info.plist */,

@@ -17,7 +17,7 @@
 @property (strong, nonatomic) UITextField *passwordField;
 @property (strong, nonatomic) UIButton *loginButton;
 @property (strong, nonatomic) UIButton *signupButton;
-@property (strong, nonatomic) UILabel *instagramLabel;
+@property (strong, nonatomic) UIImageView *instagramCursiveView;
 
 @end
 
@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor blackColor];
     [self initProperties];
     [self setUpLoginView];
     
@@ -36,7 +36,7 @@
     self.loginContentView = [self createLoginContentView];
     self.usernameField = [self createUsernameField];
     self.passwordField = [self createPasswordField];
-    self.instagramLabel = [self createInstagramLabel];
+    self.instagramCursiveView = [self createInstagramCursiveView];
     self.loginButton = [self createLoginButton];
     self.signupButton = [self createSignupButton];
 }
@@ -83,46 +83,69 @@
 }
 
 
-- (UILabel*)createInstagramLabel {
-    UILabel *label = [[UILabel alloc] init];
-    label.text = @"Instagram";
-    return label;
+- (UIImageView*)createInstagramCursiveView {
+    UIImageView *view = [[UIImageView alloc] init];
+    view.image = [UIImage imageNamed:@"instagram-cursive"];
+    view.tintColor = [UIColor whiteColor];
+    view.clipsToBounds = true;
+    view.contentMode = UIViewContentModeScaleAspectFit;
+    
+    return view;
 }
 
 - (UIView*)createLoginContentView {
     UIView *view = [[UIView alloc] init];
-    view.backgroundColor = [UIColor greenColor];
+    view.backgroundColor = [UIColor blackColor];
     return view;
 }
 
 - (UITextField*)createUsernameField {
     UITextField *usernameField = [[UITextField alloc] init];
-    [usernameField setPlaceholder:@"Username"];
-    usernameField.backgroundColor = [UIColor redColor];
+    usernameField.backgroundColor = [UIColor colorNamed:@"darkGrey"];
+    usernameField.textColor = [UIColor whiteColor];
+    
+    UIColor *placeholderColor = [UIColor lightGrayColor];
+    usernameField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Username" attributes:@{NSForegroundColorAttributeName: placeholderColor}];
+    [usernameField.layer setCornerRadius:5];
+    
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
+    usernameField.leftView = paddingView;
+    usernameField.leftViewMode = UITextFieldViewModeAlways;
+    
+    [usernameField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+    [usernameField setAutocorrectionType:UITextAutocorrectionTypeNo];
     return usernameField;
 }
 
 - (UITextField*)createPasswordField {
-    UITextField *passwordField = [[UITextField alloc] init];
-    [passwordField setPlaceholder:@"Password"];
-    passwordField.backgroundColor = [UIColor orangeColor];
+    // same styling as usernamefield
+    UITextField *passwordField = [self createUsernameField];
+    UIColor *placeholderColor = [UIColor lightGrayColor];
+    passwordField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: placeholderColor}];
+    [passwordField setSecureTextEntry:true];
     return passwordField;
 }
 
 - (UIButton*)createLoginButton {
     UIButton *button = [[UIButton alloc] init];
     [button addTarget:self action:@selector(loginUser:) forControlEvents:UIControlEventTouchUpInside];
-    [button setTitle:@"Log in" forState:UIControlStateNormal];
-    button.backgroundColor = [UIColor blueColor];
+    button.backgroundColor = [UIColor colorNamed:@"instagramBlue"];
     
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"Log in" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [attributedString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(0, [attributedString length])];
+    [button setAttributedTitle:attributedString forState:UIControlStateNormal];
+    
+    [button.layer setCornerRadius:5];
     return button;
 }
 
 - (UIButton*)createSignupButton {
-    UIButton *button = [[UIButton alloc] init];
+    UIButton *button = [self createLoginButton];
     [button addTarget:self action:@selector(registerUser:) forControlEvents:UIControlEventTouchUpInside];
-    [button setTitle:@"Sign up" forState:UIControlStateNormal];
-    button.backgroundColor = [UIColor blueColor];
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:[ button attributedTitleForState:UIControlStateNormal]];
+    [attributedString replaceCharactersInRange:NSMakeRange(0, attributedString.length) withString:@"Sign up"];
+    [button setAttributedTitle:attributedString forState:UIControlStateNormal];
     
     return button;
 }
@@ -132,19 +155,26 @@
     CGFloat displayWidth = self.view.frame.size.width;
     CGFloat displayHeight = self.view.frame.size.height;
     
+    [self.view addSubview:self.instagramCursiveView];
     [self.view addSubview:self.loginContentView];
     [self.loginContentView addSubview:self.usernameField];
     [self.loginContentView addSubview:self.passwordField];
     [self.loginContentView addSubview:self.loginButton];
     [self.loginContentView addSubview:self.signupButton];
     
-    [self.loginContentView anchor:nil left:self.view.leftAnchor bottom:nil right:self.view.rightAnchor paddingTop:0 paddingLeft:0 paddingBottom:0 paddingRight:0 width:displayWidth height:displayHeight/3 enableInsets:false];
+    [self.loginContentView anchor:self.instagramCursiveView.bottomAnchor left:self.view.leftAnchor bottom:nil right:self.view.rightAnchor paddingTop:0 paddingLeft:0 paddingBottom:0 paddingRight:0 width:displayWidth height:displayHeight/3 enableInsets:false];
     [[self.loginContentView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor] setActive:true];
     
+    [self setupInstagramCursiveView];
     [self setupUsernameField];
     [self setupPasswordField];
     [self setupLoginButton];
     [self setupSignupButton];
+}
+
+- (void)setupInstagramCursiveView {
+    [self.instagramCursiveView anchor:nil left:self.view.leftAnchor bottom:nil right:self.view.rightAnchor paddingTop:10 paddingLeft:0 paddingBottom:20 paddingRight:0 width:self.view.frame.size.width/2 height:65 enableInsets:false];
+    [[self.usernameField.centerXAnchor constraintEqualToAnchor:self.loginContentView.centerXAnchor] setActive:true];
 }
 
 - (void)setupUsernameField {
