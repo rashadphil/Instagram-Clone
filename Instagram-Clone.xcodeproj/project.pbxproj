@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1F2AC1B9286BA038006A078D /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2AC1B8286BA038006A078D /* PostDetailViewController.m */; };
+		1F2AC1BD286BB935006A078D /* InstagramTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2AC1BC286BB935006A078D /* InstagramTabBarController.m */; };
+		1F2AC1C0286BBF16006A078D /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2AC1BF286BBF16006A078D /* ProfileViewController.m */; };
+		1F2AC1C3286C1F52006A078D /* PFUser+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2AC1C2286C1F52006A078D /* PFUser+Extension.m */; };
 		1F319239286AB0F20065CB8D /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F319238286AB0F20065CB8D /* Post.m */; };
 		1F31923C286AB6F70065CB8D /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F31923B286AB6F70065CB8D /* PostCell.m */; };
 		1F77AA3128692097005B6D54 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F77AA3028692097005B6D54 /* AppDelegate.m */; };
@@ -25,6 +28,12 @@
 /* Begin PBXFileReference section */
 		1F2AC1B7286BA038006A078D /* PostDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
 		1F2AC1B8286BA038006A078D /* PostDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostDetailViewController.m; sourceTree = "<group>"; };
+		1F2AC1BB286BB935006A078D /* InstagramTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstagramTabBarController.h; sourceTree = "<group>"; };
+		1F2AC1BC286BB935006A078D /* InstagramTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstagramTabBarController.m; sourceTree = "<group>"; };
+		1F2AC1BE286BBF16006A078D /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		1F2AC1BF286BBF16006A078D /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		1F2AC1C1286C1F52006A078D /* PFUser+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PFUser+Extension.h"; sourceTree = "<group>"; };
+		1F2AC1C2286C1F52006A078D /* PFUser+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PFUser+Extension.m"; sourceTree = "<group>"; };
 		1F319237286AB0F20065CB8D /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		1F319238286AB0F20065CB8D /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		1F31923A286AB6F70065CB8D /* PostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
@@ -104,10 +113,16 @@
 				1F77AA3028692097005B6D54 /* AppDelegate.m */,
 				1F77AA3228692097005B6D54 /* SceneDelegate.h */,
 				1F77AA3328692097005B6D54 /* SceneDelegate.m */,
+				1F2AC1BB286BB935006A078D /* InstagramTabBarController.h */,
+				1F2AC1BC286BB935006A078D /* InstagramTabBarController.m */,
+				1F2AC1BE286BBF16006A078D /* ProfileViewController.h */,
+				1F2AC1BF286BBF16006A078D /* ProfileViewController.m */,
 				1FDE58822869ED8600C0AE5C /* UIView+Extension.h */,
+				1FDE58832869ED8600C0AE5C /* UIView+Extension.m */,
+				1F2AC1C1286C1F52006A078D /* PFUser+Extension.h */,
+				1F2AC1C2286C1F52006A078D /* PFUser+Extension.m */,
 				1F319237286AB0F20065CB8D /* Post.h */,
 				1F319238286AB0F20065CB8D /* Post.m */,
-				1FDE58832869ED8600C0AE5C /* UIView+Extension.m */,
 				1F31923A286AB6F70065CB8D /* PostCell.h */,
 				1F31923B286AB6F70065CB8D /* PostCell.m */,
 				1F77AA3B28692099005B6D54 /* Assets.xcassets */,
@@ -251,12 +266,15 @@
 				1F77AA3728692097005B6D54 /* LoginViewController.m in Sources */,
 				1F2AC1B9286BA038006A078D /* PostDetailViewController.m in Sources */,
 				1FDE58842869ED8600C0AE5C /* UIView+Extension.m in Sources */,
+				1F2AC1BD286BB935006A078D /* InstagramTabBarController.m in Sources */,
 				1F77AA3128692097005B6D54 /* AppDelegate.m in Sources */,
 				1F319239286AB0F20065CB8D /* Post.m in Sources */,
 				1F77AA4228692099005B6D54 /* main.m in Sources */,
+				1F2AC1C3286C1F52006A078D /* PFUser+Extension.m in Sources */,
 				1F31923C286AB6F70065CB8D /* PostCell.m in Sources */,
 				1FDE58AF286A839A00C0AE5C /* ComposeViewController.m in Sources */,
 				1F77AA3428692097005B6D54 /* SceneDelegate.m in Sources */,
+				1F2AC1C0286BBF16006A078D /* ProfileViewController.m in Sources */,
 				1FDE58AC286A621400C0AE5C /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

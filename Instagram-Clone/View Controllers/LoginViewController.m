@@ -9,6 +9,9 @@
 #import "UIView+Extension.h"
 #import "HomeViewController.h"
 #import <Parse/Parse.h>
+#import "InstagramTabBarController.h"
+#import "Post.h";
+#import "PFUser+Extension.h"
 
 @interface LoginViewController ()
 
@@ -47,12 +50,13 @@
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
     
+    
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
             NSLog(@"Error: %@", error.localizedDescription);
         } else {
             NSLog(@"User registered successfully");
-            // manually segue to logged in view
+            [self setDefaultProfilePicture];
             [self presentHomeVC];
         }
     }];
@@ -67,19 +71,28 @@
             NSLog(@"User log in failed: %@", error.localizedDescription);
         } else {
             NSLog(@"User logged in successfully");
+            [self setDefaultProfilePicture];
             [self presentHomeVC];
         }
     }];
     
+    
 }
 
-- (void) presentHomeVC {
-    HomeViewController *homeVC = [[HomeViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] init];
+- (void) setDefaultProfilePicture{
+    if ([PFUser.currentUser getProfilePicture] != nil) {
+        return;
+    }
+    UIImage *baseProfilePicture = [UIImage systemImageNamed:@"person.circle.fill"];
+    [PFUser.currentUser setProfilePicture:baseProfilePicture];
     
-    [nav setViewControllers:@[homeVC]];
-    [nav setModalPresentationStyle:UIModalPresentationFullScreen];
-    [self presentViewController:nav animated:true completion:nil];
+}
+
+
+- (void) presentHomeVC {
+    InstagramTabBarController *tabBarController = [[InstagramTabBarController alloc] init];
+    [tabBarController setModalPresentationStyle:UIModalPresentationFullScreen];
+    [self showViewController:tabBarController sender:self];
 }
 
 

@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
 #import "HomeViewController.h"
+#import "InstagramTabBarController.h"
 
 @interface SceneDelegate ()
 
@@ -19,22 +20,11 @@
 
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
     
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
     
-    UIViewController *vc1 = [[LoginViewController alloc] init];
-//    [vc1.view setBackgroundColor:[UIColor redColor]];
-    UIViewController *vc2 = [[LoginViewController alloc] init];
-//    [vc2.view setBackgroundColor:[UIColor blueColor]];
-    
-    UITabBarItem *tabBar1 = [[UITabBarItem alloc] initWithTitle:@"Bar1" image:nil tag:0];
-    UITabBarItem *tabBar2 = [[UITabBarItem alloc] initWithTitle:@"Bar2" image:nil tag:1];
-    [vc1 setTabBarItem:tabBar1];
-    [vc2 setTabBarItem:tabBar2];
-    
-    tabBarController.viewControllers = [NSArray arrayWithObjects:vc1,vc2, nil];
     
     self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene*)scene];
-    self.window.rootViewController = tabBarController;
+    self.window.rootViewController = loginVC;
     [self.window makeKeyAndVisible];
     
     
@@ -50,11 +40,8 @@
     
     // already logged in, present home screen
     if (PFUser.currentUser) {
-        HomeViewController *homeVC = [[HomeViewController alloc] init];
-        UINavigationController *nav = [[UINavigationController alloc] init];
-
-        [nav setViewControllers:@[homeVC]];
-        self.window.rootViewController = nav;
+        InstagramTabBarController *tabBarController = [[InstagramTabBarController alloc] init];
+        self.window.rootViewController = tabBarController;
     }
 }
 
