@@ -12,7 +12,7 @@
 @implementation PFUser (Extension)
 
 - (PFFileObject *)getProfilePicture {
-    PFFileObject *profilePictureObject = PFUser.currentUser[@"profilePicture"];
+    PFFileObject *profilePictureObject = self[@"profilePicture"];
     return profilePictureObject;
 }
 

@@ -149,7 +149,7 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
     Post *currentPost = self.postArray[indexPath.row];
-    cell.backgroundColor = [UIColor greenColor];
+    cell.backgroundColor = [UIColor blackColor];
     [cell setPost:currentPost];
     return cell;
 }

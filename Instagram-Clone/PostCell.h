@@ -17,7 +17,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UILabel *authorLabel;
 @property (nonatomic, strong) UILabel *captionLabel;
+
+@property (nonatomic, strong) UIView *topBannerView;
 @property (nonatomic, strong) PFImageView *postImageView;
+@property (nonatomic, strong) PFImageView *profilePictureView;
+
+@property (nonatomic, strong) UIView *bottomBannerView;
+
+@property (nonatomic, strong) UIButton *likeButton;
+@property (nonatomic, strong) UIButton *commentButton;
+
 @property (nonatomic, strong) UILabel *likeCountLabel;
 @property (nonatomic, strong) UILabel *commentCountLabel;
 

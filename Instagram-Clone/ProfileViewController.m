@@ -93,7 +93,7 @@
     imageView.clipsToBounds = true;
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.backgroundColor = [UIColor grayColor];
-    [imageView.layer setCornerRadius:60];
+    [imageView.layer setCornerRadius:50];
     
     
     imageView.userInteractionEnabled = true;
@@ -106,7 +106,7 @@
 - (void) setupProfilePictureView {
     
     CGFloat paddingTop = UIApplication.sharedApplication.statusBarFrame.size.height + self.myNav.navigationBar.frame.size.height;
-    [self.profilePictureView anchor:self.view.topAnchor left:self.view.leftAnchor bottom:nil right:nil paddingTop:paddingTop paddingLeft:0 paddingBottom:10 paddingRight:0 width:120 height:120 enableInsets:false];
+    [self.profilePictureView anchor:self.view.topAnchor left:self.view.leftAnchor bottom:nil right:nil paddingTop:paddingTop + 10 paddingLeft:10 paddingBottom:10 paddingRight:0 width:100 height:100 enableInsets:false];
     
     self.profilePictureView.file = [PFUser.currentUser getProfilePicture];
     [self.profilePictureView loadInBackground];
