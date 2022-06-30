@@ -36,7 +36,9 @@
         configuration.server = @"https://parseapi.back4app.com";
     }];
 
-    [Parse initializeWithConfiguration:config];
+    if ([Parse currentConfiguration] == nil) {
+        [Parse initializeWithConfiguration:config];
+    }
     
     // already logged in, present home screen
     if (PFUser.currentUser) {
