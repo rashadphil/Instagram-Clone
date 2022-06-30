@@ -29,7 +29,7 @@
     [super viewDidLoad];
     [self initProperties];
     
-    self.view.backgroundColor = [UIColor blueColor];
+    self.view.backgroundColor = [UIColor colorNamed:@"darkGrey"];
     self.myNav = self.navigationController;
     [self setupNavbar];
     
@@ -71,8 +71,8 @@
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
 
     // Do something with the images (based on your use case)
-    self.selectedImage = originalImage;
-    self.selectedImageView.image = originalImage;
+    self.selectedImage = editedImage;
+    self.selectedImageView.image = editedImage;
     
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -83,7 +83,11 @@
     
     UINavigationBar *navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, barHeight, self.myNav.view.frame.size.width, 44)];
     
-    UINavigationItem *navItem = [[UINavigationItem alloc] init];
+    navbar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    [navbar setBarTintColor:[UIColor blackColor]];
+    [navbar setTranslucent:NO];
+    
+    UINavigationItem *navItem = [[UINavigationItem alloc] initWithTitle:@"New Post"];
     UIBarButtonItem *cancelButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.cancelButton];
     UIBarButtonItem *shareButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.shareButton];
 
@@ -105,21 +109,21 @@
     UIButton *button = [[UIButton alloc] init];
     [button addTarget:self action:@selector(cancelPost:) forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"Cancel" forState:UIControlStateNormal];
-    button.backgroundColor = [UIColor blueColor];
     return button;
 }
 - (UIButton*)createShareButton {
     UIButton *button = [[UIButton alloc] init];
     [button addTarget:self action:@selector(sharePost:) forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"Share" forState:UIControlStateNormal];
-    button.backgroundColor = [UIColor blueColor];
     return button;
 }
 - (UIImageView*)createSelectedImageView {
     UIImageView *view = [[UIImageView alloc] init];
     [view setClipsToBounds:true];
-    view.image = [UIImage imageNamed:@"insta_camera_btn"];
-    view.backgroundColor = [UIColor purpleColor];
+    view.image = [UIImage systemImageNamed:@"camera"];
+    view.contentMode = UIViewContentModeScaleAspectFit;
+    
+    [view setTintColor:[UIColor whiteColor]];
     view.userInteractionEnabled = YES;
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(presentImagePicker:)];
@@ -131,8 +135,11 @@
 }
 - (UITextField*)createCaptionTextField {
     UITextField *textField = [[UITextField alloc] init];
-    textField.backgroundColor = [UIColor redColor];
-    textField.placeholder = @"Write a caption...";
+    
+    UIColor *color = [UIColor lightGrayColor];
+    textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Write a caption..." attributes:@{NSForegroundColorAttributeName: color}];
+    [textField setTextColor:[UIColor whiteColor]];
+    
     textField.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
     return textField;
 }
@@ -143,7 +150,7 @@
 }
 - (void)setupCaptionTextField {
     CGFloat paddingTop = UIApplication.sharedApplication.statusBarFrame.size.height + self.myNav.navigationBar.frame.size.height;
-    [self.captionTextField anchor:self.view.topAnchor left:self.selectedImageView.rightAnchor bottom:nil right:self.view.rightAnchor paddingTop:paddingTop paddingLeft:0 paddingBottom:10 paddingRight:0 width:0 height:0 enableInsets:false];
+    [self.captionTextField anchor:self.view.topAnchor left:self.selectedImageView.rightAnchor bottom:nil right:self.view.rightAnchor paddingTop:paddingTop + 30 paddingLeft:10 paddingBottom:10 paddingRight:0 width:0 height:0 enableInsets:false];
 }
 
 

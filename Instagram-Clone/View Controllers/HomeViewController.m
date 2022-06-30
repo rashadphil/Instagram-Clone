@@ -13,8 +13,9 @@
 #import "PostCell.h"
 #import "Post.h"
 #import "PostDetailViewController.h"
+#import "ProfileViewController.h"
 
-@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, PostCellDelegate>
 
 @property (strong, nonatomic) UIButton *logoutButton;
 @property (strong, nonatomic) UIButton *composeButton;
@@ -48,6 +49,10 @@
     self.tableView = [self createTableView];
 }
 
+- (void)postCell:(nonnull PostCell *)postCell didTap:(nonnull PFUser *)user {
+    [self presentProfileViewForUser:user];
+}
+
 - (void) fetchPosts {
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     [query orderByDescending:@"createdAt"];
@@ -73,7 +78,9 @@
     CGFloat barHeight = UIApplication.sharedApplication.statusBarFrame.size.height;
     
     UINavigationBar *navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, barHeight, self.myNav.view.frame.size.width, 44)];
+    [navbar setBarTintColor:[UIColor blackColor]];
     
+    navbar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     UINavigationItem *navItem = [[UINavigationItem alloc] initWithTitle:@"Home Feed"];
     
     UIBarButtonItem *logoutButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.logoutButton];
@@ -82,6 +89,7 @@
     [navItem setLeftBarButtonItem:logoutButtonItem];
     [navItem setRightBarButtonItem:postButtonItem];
     [navbar setItems:@[navItem]];
+    [navbar setTranslucent:NO];
     [self.myNav.view addSubview:navbar];
 }
 
@@ -98,6 +106,15 @@
     
 }
 
+- (void) presentProfileViewForUser:(PFUser *)user {
+    UINavigationController *nav = [[UINavigationController alloc] init];
+    ProfileViewController *profileVC = [[ProfileViewController alloc] init];
+    profileVC.user = user;
+    
+    [nav setViewControllers:@[profileVC]];
+    [self.myNav showViewController:nav sender:self];
+}
+
 - (void) presentComposeVC {
     UINavigationController *nav = [[UINavigationController alloc] init];
     ComposeViewController *composeVC = [[ComposeViewController alloc] init];
@@ -111,14 +128,14 @@
     UIButton *button = [[UIButton alloc] init];
     [button addTarget:self action:@selector(logoutUser:) forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"Logout" forState:UIControlStateNormal];
-    button.backgroundColor = [UIColor blueColor];
     return button;
 }
 
 - (UIButton*)createComposeButton {
     UIButton *button = [[UIButton alloc] init];
     
-    [button setBackgroundImage:[UIImage imageNamed:@"insta_camera_btn"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage systemImageNamed:@"camera"] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor whiteColor]];
     [button addTarget:self action:@selector(onComposePress:) forControlEvents:UIControlEventTouchUpInside];
     
     return button;
@@ -151,16 +168,28 @@
     Post *currentPost = self.postArray[indexPath.row];
     cell.backgroundColor = [UIColor blackColor];
     [cell setPost:currentPost];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+    cell.delegate = self;
     return cell;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    Post *currentPost = self.postArray[indexPath.row];
+    [self presentDetailViewForPost:currentPost];
+
+}
+
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    Post *currentPost = self.postArray[indexPath.row];
+//    PFUser *postUser = currentPost[@"author"];
+//    [self presentProfileViewForUser:postUser];
+//    
+//}
+
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.postArray.count;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Post *selectedPost = self.postArray[indexPath.row];
-    [self presentDetailViewForPost:selectedPost];
-    
-}
+
 @end

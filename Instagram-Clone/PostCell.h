@@ -11,6 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol PostCellDelegate;
+
 @interface PostCell : UITableViewCell
 
 @property (nonatomic, strong) Post *post;
@@ -30,6 +32,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *likeCountLabel;
 @property (nonatomic, strong) UILabel *commentCountLabel;
 
+@property (nonatomic, weak) id<PostCellDelegate> delegate;
+
+@end
+
+@protocol PostCellDelegate
+-(void)postCell:(PostCell *) postCell didTap: (PFUser *)user;
 @end
 
 NS_ASSUME_NONNULL_END

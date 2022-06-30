@@ -20,12 +20,14 @@
 
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
     
+    
     LoginViewController *loginVC = [[LoginViewController alloc] init];
     
     
     self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene*)scene];
     self.window.rootViewController = loginVC;
     [self.window makeKeyAndVisible];
+    
     
     
     // parse config

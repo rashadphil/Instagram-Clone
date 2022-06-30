@@ -10,14 +10,17 @@
 #import "PFUser+Extension.h"
 #import <Parse/Parse.h>
 #import "Post.h"
+#import "PhotoGridCell.h"
 
 @import Parse;
 
-@interface ProfileViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface ProfileViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) UILabel *usernameLabel;
 @property (strong, nonatomic) PFImageView *profilePictureView;
 @property (strong, nonatomic) UINavigationController *myNav;
+@property (strong, nonatomic) UICollectionView *gridView;
+@property (strong, nonatomic) NSArray *userPosts;
 
 @end
 
@@ -31,14 +34,41 @@
     self.myNav = self.navigationController;
     
     [self.view addSubview:self.profilePictureView];
+    [self.view addSubview:self.gridView];
     
     [self setupNavbar];
     [self setupProfilePictureView];
+    [self setupGridView];
+    
+    [self fetchUserPosts];
 }
 
 - (void)initProperties {
+    if (self.user == nil){
+        self.user = PFUser.currentUser;
+    }
     self.usernameLabel = [self createUsernameLabel];
     self.profilePictureView = [self createProfilePictureView];
+    
+    self.gridView = [self createGridView];
+}
+
+- (void) fetchUserPosts {
+    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    [query orderByDescending:@"createdAt"];
+    [query includeKey:@"author"];
+    [query whereKey:@"author" equalTo:self.user];
+    query.limit = 20;
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray * posts, NSError * error) {
+        if (posts != nil) {
+            self.userPosts = [posts mutableCopy];
+            [self.gridView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+        
+    }];
     
 }
 
@@ -84,7 +114,7 @@
     label.font = [UIFont systemFontOfSize:28 weight:UIFontWeightBold];
     label.textAlignment = NSTextAlignmentLeft;
     label.numberOfLines = 0;
-    label.text = @"rashadphil";
+    label.text = self.user.username;
     return label;
 }
 
@@ -95,12 +125,25 @@
     imageView.backgroundColor = [UIColor grayColor];
     [imageView.layer setCornerRadius:50];
     
-    
-    imageView.userInteractionEnabled = true;
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(presentProfilePictureSelection:)];
-    tapGesture.numberOfTapsRequired = 1;
-    [imageView addGestureRecognizer:tapGesture];
+    // You cannot change someone else's profile picture!
+    if (self.user.username == PFUser.currentUser.username) {
+        imageView.userInteractionEnabled = true;
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(presentProfilePictureSelection:)];
+        tapGesture.numberOfTapsRequired = 1;
+        [imageView addGestureRecognizer:tapGesture];
+    }
     return imageView;
+}
+
+- (UICollectionView*) createGridView {
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    UICollectionView *gridView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
+    [gridView setDataSource:self];
+    [gridView setDelegate:self];
+    
+    [gridView registerClass:[PhotoGridCell class] forCellWithReuseIdentifier:@"PhotoGridCell"];
+    gridView.backgroundColor = [UIColor blackColor];
+    return gridView;
 }
 
 - (void) setupProfilePictureView {
@@ -108,9 +151,13 @@
     CGFloat paddingTop = UIApplication.sharedApplication.statusBarFrame.size.height + self.myNav.navigationBar.frame.size.height;
     [self.profilePictureView anchor:self.view.topAnchor left:self.view.leftAnchor bottom:nil right:nil paddingTop:paddingTop + 10 paddingLeft:10 paddingBottom:10 paddingRight:0 width:100 height:100 enableInsets:false];
     
-    self.profilePictureView.file = [PFUser.currentUser getProfilePicture];
+    self.profilePictureView.file = [self.user getProfilePicture];
     [self.profilePictureView loadInBackground];
 
+}
+- (void) setupGridView {
+    
+    [self.gridView anchor:self.profilePictureView.bottomAnchor left:self.view.leftAnchor bottom:nil right:self.view.rightAnchor paddingTop:10 paddingLeft:0 paddingBottom:10 paddingRight:0 width:self.view.frame.size.width height:900 enableInsets:false];
 }
 /*
 #pragma mark - Navigation
@@ -121,5 +168,37 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    
+    PhotoGridCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoGridCell" forIndexPath:indexPath];
+    
+    Post *currentPost = self.userPosts[indexPath.row];
+    [cell setPost:currentPost];
+
+    return cell;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0, 0.5, 0, 0.5);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 1;
+}
+
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.userPosts.count;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(self.view.frame.size.width/3 - 2, self.view.frame.size.width/3);
+}
+
 
 @end
