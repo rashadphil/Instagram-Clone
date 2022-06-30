@@ -39,8 +39,8 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. Implementing likes would be a good feature but it is more complicated than I thought. Each post would need to store a list of Users that have liked the post. When loading a post, you would have to check if the logged in user liked the post.
+2. Extending the app by creating my own API and database would be useful. This is what I have planned for my capstone project. 
 
 ## Video Walkthrough
 
@@ -50,15 +50,13 @@ Here's a walkthrough of implemented user stories:
 
 GIF created with [Kap](https://getkap.co/).
 
+![](instagram-clone.gif)
+
 ## Credits
-
-List an 3rd party libraries, icons, graphics, or other assets you used in your app.
-
-- [AFNetworking](https://github.com/AFNetworking/AFNetworking) - networking task library
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Doing this project without using storyboard was extremely difficult at first, but it made components much more reusable. 
 
 ## License
 
